@@ -193,40 +193,7 @@ def recommend_major_with_openai(student_profile):
     return recommendation
 
 
-def create_pdf(student_profile, recommendation):
-    # Create a PDF document
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_auto_page_break(auto=True, margin=15)
-    pdf.set_font("Helvetica", size=12)
-    
-    # Title
-    pdf.cell(0, 10, "University Major Recommendation", ln=True, align="C")
-    pdf.ln(10)
 
-    # Add student profile
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Student Profile", ln=True)
-    pdf.set_font("Arial", size=12)
-    
-    # Ensure each key-value pair in the profile is printed in the PDF
-    for key, value in student_profile.items():
-        if value:
-            pdf.multi_cell(0, 10, f"{key.replace('_', ' ').title()}: {value}")
-
-    # Add recommendation
-    pdf.ln(10)
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Recommended Major:", ln=True)
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, recommendation)
-
-    # Save PDF data to a BytesIO stream
-    pdf_buffer = BytesIO()
-    pdf.output(pdf_buffer, dest='S')
-    pdf_buffer.seek(0)  # Reset pointer to start of file
-    
-    return pdf_buffer.getvalue()
 
 # Initialize page in session state
 if "page" not in st.session_state:
@@ -350,13 +317,7 @@ elif st.session_state["page"] == 3:
             st.success(recommendation)
 
             # Generate and download PDF
-            pdf_buffer = create_pdf(st.session_state["student_profile"], recommendation)
-            st.download_button(
-                label="📄 Download Recommendation as PDF",
-                data=pdf_buffer,
-                file_name="recommendation.pdf",
-                mime="application/pdf"
-            )
+            
         except Exception as e:
             st.error(f"An error occurred: {e}")
 
