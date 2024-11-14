@@ -220,12 +220,10 @@ def create_pdf(student_profile, recommendation):
     pdf.set_font("Arial", size=12)
     pdf.multi_cell(0, 10, recommendation)
 
-    # Save to a BytesIO stream
-    pdf_buffer = BytesIO()
-    pdf.output(pdf_buffer)
-    pdf_buffer.seek(0)
+    # Output as a byte string and encode it in latin1
+    pdf_data = pdf.output(dest='S').encode("latin1")
     
-    return pdf_buffer
+    return pdf_data
 
 # Initialize page in session state
 if "page" not in st.session_state:
