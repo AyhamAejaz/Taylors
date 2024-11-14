@@ -350,7 +350,7 @@ elif st.session_state["page"] == 3:
             pdf_buffer = create_pdf(st.session_state["student_profile"], recommendation)
             st.download_button(
                 label="📄 Download Recommendation as PDF",
-                data=pdf_buffer.getvalue(),
+                data=pdf_buffer,
                 file_name="recommendation.pdf",
                 mime="application/pdf"
             )
