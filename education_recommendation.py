@@ -209,9 +209,10 @@ def create_pdf(student_profile, recommendation):
     pdf.cell(0, 10, "Student Profile", ln=True)
     pdf.set_font("Arial", size=12)
     
+    # Ensure each key-value pair in the profile is printed in the PDF
     for key, value in student_profile.items():
         if value:
-            pdf.cell(0, 10, f"{key.replace('_', ' ').title()}: {value}", ln=True)
+            pdf.multi_cell(0, 10, f"{key.replace('_', ' ').title()}: {value}")
 
     # Add recommendation
     pdf.ln(10)
@@ -221,9 +222,11 @@ def create_pdf(student_profile, recommendation):
     pdf.multi_cell(0, 10, recommendation)
 
     # Output as a byte string and encode it in utf-8
-    pdf_data = pdf.output(dest='S').encode("utf-8")
+    pdf_data = BytesIO()
+    pdf.output(pdf_data, "F")
+    pdf_data.seek(0)
     
-    return pdf_data
+    return pdf_data.getvalue()
 
 # Initialize page in session state
 if "page" not in st.session_state:
