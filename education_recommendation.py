@@ -1,5 +1,5 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import os
 from dotenv import load_dotenv
 from io import BytesIO
@@ -10,7 +10,7 @@ from fpdf import FPDF
 load_dotenv()
 
 # Set the OpenAI API key (ensure it’s stored securely)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 
 # Define the system instruction
 system_inst = """
