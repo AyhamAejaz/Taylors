@@ -220,8 +220,8 @@ def create_pdf(student_profile, recommendation):
     pdf.set_font("Arial", size=12)
     pdf.multi_cell(0, 10, recommendation)
 
-    # Output as a byte string and encode it in latin1
-    pdf_data = pdf.output(dest='S').encode("latin1")
+    # Output as a byte string and encode it in utf-8
+    pdf_data = pdf.output(dest='S').encode("utf-8")
     
     return pdf_data
 
