@@ -10,7 +10,7 @@ from fpdf import FPDF
 load_dotenv()
 
 # Set the OpenAI API key (ensure it’s stored securely)
-client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+client = OpenAI(api_key=st.secrets['OPENAI_API_KEY'])
 
 # Define the system instruction
 system_inst = """
