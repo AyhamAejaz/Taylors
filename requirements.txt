@@ -1,0 +1,5 @@
+streamlit
+openai
+load_dotenv
+BytesIO
+FPDF
