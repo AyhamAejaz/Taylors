@@ -180,7 +180,7 @@ def recommend_major_with_openai(student_profile):
     """
 
     # Generate recommendation with OpenAI API
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": system_inst},
